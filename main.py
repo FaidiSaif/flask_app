@@ -9,7 +9,7 @@ from security import authenticate,identity
 from ressources.user import UserRegister
 from ressources.item import Item , ItemList
 from ressources.store import Store , StoreList
-#importinh Store , Item
+
 
 app             = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"]   = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
