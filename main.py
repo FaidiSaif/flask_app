@@ -19,12 +19,6 @@ app.secret_key  = 'XXX156Ye54'
 api             = Api(app)
 jwt             = JWT(app,authenticate,identity)
 
-@app.before_first_request
-def create_tables():
-    ''' this uses all the subclasses of the db.Model to create the tables
-    '''
-    db.create_all()
-
 
 
 api.add_resource(Item, '/item/<string:name>')
@@ -35,8 +29,15 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(Store, '/store/<string:name>')
 api.add_resource(StoreList, '/stores')
 
+db.init_app(app)
+
+@app.before_first_request
+def create_tables():
+    ''' this uses all the subclasses of the db.Model to create the tables
+    '''
+    db.create_all()
+
 if __name__ == '__main__':
-    db.init_app(app)
     app.run(debug = True)
 
 
