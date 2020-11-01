@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_restful import  Api
 from flask_jwt import JWT
@@ -11,7 +12,8 @@ from ressources.store import Store , StoreList
 #importinh Store , Item
 
 app             = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"]   =   'sqlite:///data.db'
+app.config["SQLALCHEMY_DATABASE_URI"]   = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+# if the DATABASE_URL environment variable is set retrieve it's value else use the sqlite:///data.db as a default path
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # the line above : deactivate the extension (flask_SQLAlchemy) tracker to save resources
 # but doesn't deactivate the underlying SQLAlchemy tracker
